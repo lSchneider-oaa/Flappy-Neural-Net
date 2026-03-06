@@ -1,17 +1,24 @@
 import random
 import numpy as np
-
-import random
-import numpy as np
+from brain import NeuralNet
 
 class Bird:
     def __init__(self):
+        self.brain = NeuralNet(3,4,1)
         self.y = 300.0
         self.velocity = 0.0
         self.gravity = 1.2
         self.jump_power = -12.0
         self.is_alive = True
         self.score = 0
+
+    def think(self, pipe):
+        bird_y = self.y
+        pipe_dist = pipe.x - 100
+        pipe_gap = pipe.gap_y
+        output = self.brain.predict([bird_y, pipe_dist, pipe_gap])
+        if output[0][0] > 0.5:
+            self.jump()
 
     def jump(self):
         self.velocity = self.jump_power
