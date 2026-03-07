@@ -14,7 +14,7 @@ class NeuralNet:
     def predict(self, inputs):
         x = np.array(inputs, ndmin=2).T
         a1 = sigmoid(np.dot(self.W1,x) + self.b1)
-        return sigmoid(np.dot(self.W2,a1)+self.b2)
+        return sigmoid(np.dot(self.W2,a1) + self.b2)
     
     def clone(self):
         return copy.deepcopy(self)
